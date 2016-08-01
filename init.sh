@@ -55,8 +55,8 @@ sudo apt-get install nginx
 # create webroot
 #
 sudo mkdir /var/www
-sudo touch /var/www/phpinfo.php
-sudo echo "<?php phpinfo();" > /var/www/phpinfo.php
+#sudo touch /var/www/phpinfo.php
+#sudo echo "<?php phpinfo();" > /var/www/phpinfo.php
 
 #
 # install phalcon
@@ -82,9 +82,9 @@ cd phalcon-devtools
 #
 # copy configs
 #
-sudo cp /vagrant/config/php.ini /etc/php/7.0/fpm/php.ini
-sudo cp /vagrant/config/www.conf /etc/php/7.0/fpm/pool.d/www.conf
-sudo cp /vagrant/config/default.conf /etc/nginx/conf.d/default.conf
+sudo cp /vagrant/config/php/php.ini /etc/php/7.0/fpm/php.ini
+sudo cp /vagrant/config/php/www.conf /etc/php/7.0/fpm/pool.d/www.conf
+sudo cp /vagrant/config/nginx/default.conf /etc/nginx/conf.d/default.conf
 
 #
 # restart services
