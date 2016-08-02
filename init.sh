@@ -1,5 +1,7 @@
 #!/usr/bin/env bash
 
+sudo -i
+
 #
 # Add PHP and PostgreSQL and Nginx repositories
 #
@@ -52,13 +54,6 @@ php7.0-dev
 sudo apt-get install nginx
 
 #
-# create webroot
-#
-sudo mkdir /var/www
-#sudo touch /var/www/phpinfo.php
-#sudo echo "<?php phpinfo();" > /var/www/phpinfo.php
-
-#
 # install phalcon
 #
 
@@ -69,15 +64,20 @@ sudo touch /etc/php/7.0/fpm/conf.d/30-phalcon.ini
 sudo echo "extension=phalcon.so" > /etc/php/7.0/fpm/conf.d/30-phalcon.ini
 sudo touch /etc/php/7.0/cli/conf.d/30-phalcon.ini
 sudo echo "extension=phalcon.so" > /etc/php/7.0/cli/conf.d/30-phalcon.ini
+cd ../..
+
+#
+# Composer for PHP
+#
+curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
 
 #
 # install devtools
 #
-#cd /vagrant
-cd /home/vagrant
-sudo git clone git://github.com/phalcon/phalcon-devtools.git
-cd phalcon-devtools
-. ./phalcon.sh
+
+#sudo git clone git://github.com/phalcon/phalcon-devtools.git
+#cd phalcon-devtools
+#. ./phalcon.sh
 
 #
 # copy configs
