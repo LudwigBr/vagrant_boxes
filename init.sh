@@ -126,7 +126,7 @@ sudo service nginx restart
 #
 echo "--------------------> load repository <--------------------";
 cd /var/www
-git clone https://${name}:${pw}@github.com/LudwigBr/woh.git
+git clone https://${name}:${pw}@${giturl}
 cd woh/
 composer install
 ln -s /var/www/woh/vendor/phalcon/devtools/phalcon.php /usr/bin/phalcon
