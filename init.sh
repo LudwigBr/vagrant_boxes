@@ -1,8 +1,18 @@
 #!/usr/bin/env bash
 
+######################################################################
+## BOTH FILES NEED Linux "Line endings" (LF)!
+## You need to create a github_login.sh with the following content: ##
+## name=github_login_name                                           ##
+## pw=github_login_password                                   ##
+######################################################################
+
+source /vagrant/github_login.sh
+
 #
 # Add PHP and PostgreSQL and Nginx repositories
 #
+echo "--------------------> add repositories <--------------------";
 add-apt-repository -y ppa:ondrej/php
 apt-add-repository -y ppa:chris-lea/libsodium
 add-apt-repository -y ppa:chris-lea/redis-server
@@ -16,6 +26,7 @@ curl http://nginx.org/keys/nginx_signing.key | apt-key add -
 #
 # Cleanup package manager
 #
+echo "--------------------> install clean up manager <--------------------";
 sudo apt-get clean
 sudo rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
@@ -27,6 +38,7 @@ sudo apt-get autoremove -y
 #
 # install basics
 #
+echo "--------------------> install basic packages <--------------------";
 sudo apt-get install -y \
     curl \
     git \
@@ -43,6 +55,7 @@ sudo apt-get install -y \
 #
 # install php
 #
+echo "--------------------> install php <--------------------";
 sudo apt-get install -y \
     php7.0 \
     php7.0-fpm \
@@ -57,6 +70,7 @@ sudo apt-get install -y \
 #
 # install nginx, postgres
 #
+echo "--------------------> install nginx, postgres <--------------------";
 sudo apt-get install -y \
     nginx \
     postgresql \
@@ -65,10 +79,10 @@ sudo apt-get install -y \
 #
 # install phalcon
 #
-
+echo "--------------------> install phalcon <--------------------";
 curl -s https://packagecloud.io/install/repositories/phalcon/stable/script.deb.sh | sudo bash
 sudo apt-get install php7.0-phalcon
-
+#
 #git clone --depth=1 git://github.com/phalcon/cphalcon.git
 #cd cphalcon/build
 #sudo ./install
@@ -81,16 +95,18 @@ sudo apt-get install php7.0-phalcon
 #
 # Composer for PHP
 #
+echo "--------------------> install composer <--------------------";
 curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
 
-sudo git clone git://github.com/phalcon/phalcon-devtools.git
-cd phalcon-devtools
-sudo ln -s ~/phalcon-devtools/phalcon.php /usr/bin/phalcon
-sudo chmod ugo+x /usr/bin/phalcon
+#sudo git clone git://github.com/phalcon/phalcon-devtools.git
+#cd phalcon-devtools
+#sudo ln -s ~/phalcon-devtools/phalcon.php /usr/bin/phalcon
+#sudo chmod ugo+x /usr/bin/phalcon
 
 #
 # copy configs
 #
+echo "--------------------> copy configs <--------------------";
 sudo cp /vagrant/config/php/php.ini /etc/php/7.0/fpm/php.ini
 sudo cp /vagrant/config/php/www.conf /etc/php/7.0/fpm/pool.d/www.conf
 sudo cp /vagrant/config/nginx/default.conf /etc/nginx/conf.d/default.conf
@@ -100,6 +116,18 @@ sudo cp /vagrant/config/pgsql/pg_hba.conf /etc/postgresql/9.6/main/pg_hba.conf
 #
 # restart services
 #
+echo "--------------------> restart services <--------------------";
 sudo /etc/init.d/postgresql restart
 sudo service php7.0-fpm restart
 sudo service nginx restart
+
+#
+# load repository
+#
+echo "--------------------> load repository <--------------------";
+cd /var/www
+git clone https://${name}:${pw}@github.com/LudwigBr/woh.git
+cd woh/
+composer install
+ln -s /var/www/woh/vendor/phalcon/devtools/phalcon.php /usr/bin/phalcon
+chmod ugo+x /usr/bin/phalcon
