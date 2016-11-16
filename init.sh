@@ -117,7 +117,7 @@ sudo cp /vagrant/config/pgsql/pg_hba.conf /etc/postgresql/9.6/main/pg_hba.conf
 # restart services
 #
 echo "--------------------> restart services <--------------------";
-sudo /etc/init.d/postgresql restart
+sudo service postgresql restart
 sudo service php7.0-fpm restart
 sudo service nginx restart
 
