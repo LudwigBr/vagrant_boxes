@@ -127,7 +127,7 @@ sudo service nginx restart
 echo "--------------------> load repository <--------------------";
 cd /var/www
 git clone https://${name}:${pw}@${giturl}
-cd woh/
+cd athleten_webseite/
 composer install
-ln -s /var/www/woh/vendor/phalcon/devtools/phalcon.php /usr/bin/phalcon
-chmod ugo+x /usr/bin/phalcon
+sudo ln -s /var/www/athleten_webseite/vendor/phalcon/devtools/phalcon.php /usr/bin/phalcon
+sudo chmod ugo+x /usr/bin/phalcon
