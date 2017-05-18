@@ -1,10 +1,10 @@
 #!/usr/bin/env bash
 
 ######################################################################
-## BOTH FILES NEED Linux "Line endings" (LF)!
+## BOTH FILES NEED Linux "Line endings" (LF)!                       ##
 ## You need to create a github_login.sh with the following content: ##
 ## name=github_login_name                                           ##
-## pw=github_login_password                                   ##
+## pw=github_login_password                                         ##
 ######################################################################
 
 source /vagrant/github_login.sh
@@ -68,13 +68,18 @@ sudo apt-get install -y \
     php7.0-dev
 
 #
-# install nginx, postgres
+# install nginx, postgres, node.js, npm, bower
 #
-echo "--------------------> install nginx, postgres <--------------------";
+echo "--------------------> install nginx, postgres, node.js, npm, bower <--------------------";
 sudo apt-get install -y \
     nginx \
     postgresql \
     postgresql-contrib
+    nodejs
+    npm
+
+sudo ln -s /usr/bin/nodejs /usr/bin/node
+sudo npm install -g bower
 
 #
 # install phalcon
@@ -82,15 +87,6 @@ sudo apt-get install -y \
 echo "--------------------> install phalcon <--------------------";
 curl -s https://packagecloud.io/install/repositories/phalcon/stable/script.deb.sh | sudo bash
 sudo apt-get install php7.0-phalcon
-#
-#git clone --depth=1 git://github.com/phalcon/cphalcon.git
-#cd cphalcon/build
-#sudo ./install
-#sudo touch /etc/php/7.0/fpm/conf.d/30-phalcon.ini
-#sudo echo "extension=phalcon.so" > /etc/php/7.0/fpm/conf.d/30-phalcon.ini
-#sudo touch /etc/php/7.0/cli/conf.d/30-phalcon.ini
-#sudo echo "extension=phalcon.so" > /etc/php/7.0/cli/conf.d/30-phalcon.ini
-#cd ../..
 
 #
 # Composer for PHP
@@ -98,17 +94,13 @@ sudo apt-get install php7.0-phalcon
 echo "--------------------> install composer <--------------------";
 curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
 
-#sudo git clone git://github.com/phalcon/phalcon-devtools.git
-#cd phalcon-devtools
-#sudo ln -s ~/phalcon-devtools/phalcon.php /usr/bin/phalcon
-#sudo chmod ugo+x /usr/bin/phalcon
-
 #
 # copy configs
 #
 echo "--------------------> copy configs <--------------------";
 sudo cp /vagrant/config/php/php.ini /etc/php/7.0/fpm/php.ini
 sudo cp /vagrant/config/php/www.conf /etc/php/7.0/fpm/pool.d/www.conf
+sudo cp /vagrant/config/nginx/nginx.conf /etc/nginx/nginx.conf
 sudo cp /vagrant/config/nginx/default.conf /etc/nginx/conf.d/default.conf
 sudo cp /vagrant/config/pgsql/postgresql.conf /etc/postgresql/9.6/main/postgresql.conf
 sudo cp /vagrant/config/pgsql/pg_hba.conf /etc/postgresql/9.6/main/pg_hba.conf
