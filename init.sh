@@ -66,6 +66,7 @@ sudo apt-get install -y \
     php7.0-zip \
     php7.0-pgsql \
     php7.0-dev
+    php-xdebug
 
 #
 # install nginx, postgres, node.js, npm, bower
@@ -99,6 +100,7 @@ curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin
 #
 echo "--------------------> copy configs <--------------------";
 sudo cp /vagrant/config/php/php.ini /etc/php/7.0/fpm/php.ini
+sudo cp /vagrant/config/php/cli_php.ini /etc/php/7.0/cli/php.ini
 sudo cp /vagrant/config/php/www.conf /etc/php/7.0/fpm/pool.d/www.conf
 sudo cp /vagrant/config/nginx/nginx.conf /etc/nginx/nginx.conf
 sudo cp /vagrant/config/nginx/default.conf /etc/nginx/conf.d/default.conf
@@ -117,6 +119,7 @@ sudo service nginx restart
 # load repository
 #
 echo "--------------------> load repository <--------------------";
+
 cd /var/www
 git clone https://${name}:${pw}@${giturl}
 cd woh/
