@@ -1,3 +1,4 @@
 .vagrant/
 doc_root/
 github_login.sh
+set_postgres_password.sh
