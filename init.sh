@@ -81,7 +81,3 @@ sudo service nginx restart
 #git clone https://${name}:${pw}@${giturl}
 #cd woh/
 #composer install
-#ln -s /var/www/woh/vendor/phalcon/devtools/phalcon.php /usr/bin/phalcon
-#chmod ugo+x /usr/bin/phalcon
-#bower install
-kgudfgjfghfgjhfgjhfgjhfgjh
