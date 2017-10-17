@@ -49,14 +49,15 @@ sudo apt-get install -y \
     php7.0-intl \
     php7.0-zip \
     php7.0-pgsql \
-    php7.0-dev
+    php7.0-dev \
     php-xdebug
 
 echo "--------------------> install nginx, postgres <--------------------";
 sudo apt-get install -y \
     nginx \
     postgresql \
-    postgresql-contrib
+    postgresql-contrib \
+#    npm
 
 echo "--------------------> install composer <--------------------";
 curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
