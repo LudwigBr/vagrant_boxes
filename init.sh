@@ -41,16 +41,16 @@ sudo apt-get install -y \
 
 echo "--------------------> install php <--------------------";
 sudo apt-get install -y \
-    php7.0 \
-    php7.0-fpm \
-    php7.0-cli \
-    php7.0-curl \
-    php7.0-gd \
-    php7.0-intl \
-    php7.0-zip \
-    php7.0-pgsql \
-    php7.0-dev \
-    php-xdebug
+    php7.1 \
+    php7.1-fpm \
+    php7.1-cli \
+    php7.1-curl \
+    php7.1-gd \
+    php7.1-intl \
+    php7.1-zip \
+    php7.1-pgsql \
+    php7.1-dev \
+    php7.1-mbstring \
 
 echo "--------------------> install nginx, postgres <--------------------";
 sudo apt-get install -y \
@@ -59,22 +59,34 @@ sudo apt-get install -y \
     postgresql-contrib \
 #    npm
 
+echo "--------------------> install xdebug <--------------------";
+sudo wget xdebug.org/files/xdebug-2.5.4.tgz
+sudo tar -xvzf xdebug-2.5.4.tgz
+cd xdebug-2.5.4
+sudo phpize
+sudo ./configure
+sudo make
+sudo cp modules/xdebug.so /usr/lib/php/20160303/xdebug.so
+
 echo "--------------------> install composer <--------------------";
 curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
 
 echo "--------------------> copy configs <--------------------";
-sudo cp /vagrant/config/php/php.ini /etc/php/7.0/fpm/php.ini
-sudo cp /vagrant/config/php/cli_php.ini /etc/php/7.0/cli/php.ini
-sudo cp /vagrant/config/php/www.conf /etc/php/7.0/fpm/pool.d/www.conf
+sudo cp /vagrant/config/php/php.ini /etc/php/7.1/fpm/php.ini
+sudo cp /vagrant/config/php/cli_php.ini /etc/php/7.1/cli/php.ini
+sudo cp /vagrant/config/php/www.conf /etc/php/7.1/fpm/pool.d/www.conf
 sudo cp /vagrant/config/nginx/nginx.conf /etc/nginx/nginx.conf
 sudo cp /vagrant/config/nginx/default.conf /etc/nginx/conf.d/default.conf
-sudo cp /vagrant/config/pgsql/postgresql.conf /etc/postgresql/9.6/main/postgresql.conf
-sudo cp /vagrant/config/pgsql/pg_hba.conf /etc/postgresql/9.6/main/pg_hba.conf
+sudo cp /vagrant/config/pgsql/postgresql.conf /etc/postgresql/10/main/postgresql.conf
+sudo cp /vagrant/config/pgsql/pg_hba.conf /etc/postgresql/10/main/pg_hba.conf
 
 echo "--------------------> restart services <--------------------";
 sudo service postgresql restart
-sudo service php7.0-fpm restart
+sudo service php7.1-fpm restart
 sudo service nginx restart
+
+echo "--------------------> set postgres password 'postgres' <--------------------";
+sudo -u postgres psql -U postgres -d postgres -c "alter user postgres with password 'postgres';"
 
 #echo "--------------------> load repository <--------------------";
 #
