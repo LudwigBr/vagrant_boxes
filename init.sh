@@ -69,10 +69,11 @@ sudo apt-get install -y \
     php7.0-dev
 
 #
-# install nginx, postgres
+# install xdebug, nginx, postgres
 #
 echo "--------------------> install nginx, postgres <--------------------";
 sudo apt-get install -y \
+    php-xdebug \
     nginx \
     postgresql-9.6
 
@@ -108,6 +109,7 @@ curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin
 #
 echo "--------------------> copy configs <--------------------";
 sudo cp /vagrant/config/php/php.ini /etc/php/7.0/fpm/php.ini
+sudo cp /vagrant/config/php/xdebug.ini /etc/php/7.0/mods-available/xdebug.ini
 sudo cp /vagrant/config/php/www.conf /etc/php/7.0/fpm/pool.d/www.conf
 sudo cp /vagrant/config/nginx/default.conf /etc/nginx/conf.d/default.conf
 sudo cp /vagrant/config/nginx/nginx.conf /etc/nginx/nginx.conf

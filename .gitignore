@@ -1,3 +1,5 @@
 .vagrant/
 doc_root/
 github_login.sh
+
+\.idea/
