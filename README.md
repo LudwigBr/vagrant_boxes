@@ -13,9 +13,14 @@ forwarded ports (can be changed in vagrantfile):
 - 9000 - php-fpm
 - 5432 - postgres
 
-change password for postgres:
+change password for postgres and create database:
 - psql postgres postgres
 - \password postgres
 - \q
+- createdb athlete_manager (outside of psql!)
+- psql -U postgres -d athlete_manager -a -1 -f PATH_TO_SQL/DDL_FILE 
+- psql athlete_manager < db_dump_data_only 
+
+
 
 You can access your repository via "localhost/name_of_github_repository"
