@@ -13,11 +13,9 @@ forwarded ports (can be changed in vagrantfile):
 - 9000 - php-fpm
 - 5432 - postgres
 
-
-You need to create a "github_login.sh"-file in which you enter your github credentials to clone from private repositories and the url to the repository.
-use the following structure:
-name="github_login_name"
-pw="github_login_password"
-giturl="url_to_github_repository"
+change password for postgres:
+- psql postgres postgres
+- \password postgres
+- \q
 
 You can access your repository via "localhost/name_of_github_repository"
