@@ -22,7 +22,7 @@ echo -e "deb http://apt.postgresql.org/pub/repos/apt/ trusty-pgdg main" | tee -a
 wget --quiet -O - https://www.postgresql.org/media/keys/ACCC4CF8.asc | apt-key add -
 echo "deb http://nginx.org/packages/mainline/ubuntu/ `lsb_release -cs` nginx" >> /etc/apt/sources.list
 echo "deb-src http://nginx.org/packages/mainline/ubuntu/ `lsb_release -cs` nginx"  >> /etc/apt/sources.list
-curl http://nginx.org/keys/nginx_signing.key | apt-key add -
+curl http://nginx.org/keys/nginx_signing.key | sudo apt-key add -
 
 #
 # Cleanup package manager
@@ -32,7 +32,7 @@ sudo apt-get clean
 sudo rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
 sudo apt-key update
-sudo apt-get update -qq
+sudo apt-get update
 sudo apt-get upgrade -y --force-yes
 sudo apt-get autoremove -y
 

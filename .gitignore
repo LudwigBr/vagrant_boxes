@@ -3,3 +3,5 @@ doc_root/
 github_login.sh
 
 \.idea/
+
+node_modules/

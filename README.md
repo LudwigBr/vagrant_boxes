@@ -17,9 +17,9 @@ change password for postgres and create database:
 - psql postgres postgres
 - \password postgres
 - \q
-- createdb athlete_manager (outside of psql!)
+- createdb -U postgres athlete_manager (outside of psql!)
 - psql -U postgres -d athlete_manager -a -1 -f PATH_TO_SQL/DDL_FILE 
-- psql athlete_manager < db_dump_data_only 
+- psql -U postgres athlete_manager < db_dump_data_only 
 
 
 
