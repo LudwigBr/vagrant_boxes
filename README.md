@@ -24,3 +24,19 @@ change password for postgres and create database:
 
 
 You can access your repository via "localhost/name_of_github_repository"
+
+# database postgres
+To access the database via command line use the following command:
+```
+psql "postgresql://$DB_USER:$DB_PASSWORD@localhost/$DB_NAME"
+```
+To run a SQL script use:
+```
+psql "postgresql://$DB_USER:$DB_PASSWORD@localhost/$DB_NAME" -f $FILENAME
+```
+To create schema (-s) or data (-a) file (.ddl) use:
+```
+pg_dump "postgresql://$DB_USER:$DB_PASSWORD@localhost/$DB_NAME" -f $FILENAME -s/-a
+```
+When running SQL commands remember to finish every command with a ";".
+
